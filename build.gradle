@@ -17,6 +17,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
 	implementation group: "com.twilio.sdk", name: "twilio", version: "8.1.0"
+	implementation 'com.eatthepath:java-otp:0.2.0'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {

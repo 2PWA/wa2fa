@@ -1,5 +1,7 @@
 package com.ppwa.wa2fa.otp.domain;
 
-public interface OtpMessageService {
+import reactor.core.publisher.Mono;
 
+public interface OtpMessageService {
+    Mono<String> sendCode(OtpMessage otpMessage);
 }

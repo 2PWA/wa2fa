@@ -22,7 +22,7 @@ public final class OtpController {
     public Mono<String> generate(@RequestBody CreateOtpMessageCommand createOtpMessageCommand,
                                  @RequestHeader("x-api-key") String apiKey) {
         createOtpMessageCommand.setApiKey(apiKey);
-        return this.generateOtpMessage.execute(createOtpMessageCommand);
+        return generateOtpMessage.execute(createOtpMessageCommand);
     }
 
     @PostMapping("/otp/{uuid}")
@@ -31,6 +31,6 @@ public final class OtpController {
                                  @RequestHeader("x-wa2fa-otp") String otpCode) {
         ValidateOtpMessageCommand validateOtpMessageCommand = new ValidateOtpMessageCommand(uuid, apiKey, otpCode);
 
-        return this.validateOtpMessage.execute(validateOtpMessageCommand);
+        return validateOtpMessage.execute(validateOtpMessageCommand);
     }
 }

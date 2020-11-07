@@ -6,11 +6,11 @@ public class OtpMessage {
 
     @MongoId
     private final String uuid;
-    private final Integer code;
+    private final String code;
     private final String countryCode;
     private final String phoneNumber;
 
-    public OtpMessage(String uuid, Integer code, String countryCode, String phoneNumber) {
+    public OtpMessage(String uuid, String code, String countryCode, String phoneNumber) {
         this.uuid = uuid;
         this.code = code;
         this.countryCode = countryCode;
@@ -18,18 +18,18 @@ public class OtpMessage {
     }
 
     public String getUuid() {
-        return this.uuid;
+        return uuid;
     }
 
-    public Integer getCode() {
-        return this.code;
+    public String getCode() {
+        return code;
     }
 
     public String getCountryCode() {
-        return this.countryCode;
+        return countryCode;
     }
 
     public String getPhoneNumber() {
-        return this.phoneNumber;
+        return phoneNumber;
     }
 }

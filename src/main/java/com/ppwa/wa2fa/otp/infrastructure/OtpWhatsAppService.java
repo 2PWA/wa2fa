@@ -13,7 +13,6 @@ public final class OtpWhatsAppService implements OtpMessageService {
     private static final String ACCOUNT_SID = System.getenv("ACCOUNT_SID");
     private static final String AUTH_TOKEN = System.getenv("AUTH_TOKEN");
 
-
     public Mono<String> sendCode(OtpMessage otpMessage) {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message message = Message.creator(

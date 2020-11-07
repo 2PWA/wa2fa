@@ -15,8 +15,8 @@ public class ValidateOtpMessage {
 
     public Mono<String> execute(ValidateOtpMessageCommand validateOtpMessageCommand) {
 
-        return this.otpRepository.findById(validateOtpMessageCommand.getUuid())
-                .flatMap(otpMessage -> this.validateOtpCode(otpMessage, validateOtpMessageCommand));
+        return otpRepository.findById(validateOtpMessageCommand.getUuid())
+                            .flatMap(otpMessage -> validateOtpCode(otpMessage, validateOtpMessageCommand));
     }
 
     private Mono<String> validateOtpCode(OtpMessage otpMessage, ValidateOtpMessageCommand validateOtpMessageCommand) {
