@@ -1,5 +1,4 @@
 spring:
   data:
     mongodb:
-    #  uri: mongodb://${wa2fauser}:${wa2fapass}@ds035673.mlab.com:35673/wa2fa?retryWrites=false
-      uri: mongodb://wa2fauser:wa2fapass@ds035673.mlab.com:35673/wa2fa?retryWrites=false
+      uri: mongodb://${wa2fauser}:${wa2fapass}@ds035673.mlab.com:35673/wa2fa?retryWrites=false

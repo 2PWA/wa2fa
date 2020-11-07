@@ -3,6 +3,7 @@ package com.ppwa.wa2fa.otp.domain;
 import com.ppwa.wa2fa.otp.application.CreateOtpMessageCommand;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Component
@@ -20,6 +21,6 @@ public class OtpMessageFactory {
         String otpCode = otpGeneratorService.generate();
         String countryCode = createOtpMessageCommand.getCountryCode();
         String phoneNumber = createOtpMessageCommand.getPhoneNumber();
-        return new OtpMessage(uuid, otpCode, countryCode, phoneNumber);
+        return new OtpMessage(uuid, otpCode, countryCode, phoneNumber, LocalDateTime.now());
     }
 }

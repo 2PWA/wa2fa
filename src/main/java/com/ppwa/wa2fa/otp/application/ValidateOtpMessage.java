@@ -5,6 +5,9 @@ import com.ppwa.wa2fa.otp.infrastructure.CodeNotValidException;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 import static reactor.core.publisher.Mono.error;
 
 @Service
@@ -26,7 +29,10 @@ public class ValidateOtpMessage {
     }
 
     private Mono<OtpMessage> validateOtpCode(OtpMessage otpMessage, ValidateOtpMessageCommand validateOtpMessageCommand) {
-        if (!otpMessage.getCode().equals(validateOtpMessageCommand.getCode())) throw new CodeNotValidException();
-        return  Mono.just(otpMessage);
+        if (!otpMessage.getCode().equals(validateOtpMessageCommand.getCode())
+                || Duration.between(otpMessage.getDateCreated(), LocalDateTime.now()).getSeconds() > 60) {
+            throw new CodeNotValidException();
+        }
+        return Mono.just(otpMessage);
     }
 }

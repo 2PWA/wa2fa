@@ -10,11 +10,12 @@ import reactor.core.publisher.Mono;
 @Service
 public final class OtpWhatsAppService implements OtpMessageService {
 
-    private static final String ACCOUNT_SID = "ACa6cbc88514902675d85f202f9d639473";
-    private static final String AUTH_TOKEN = "07d68d819b1ad50dfa42ee44847efb87";
+    private static final String ACCOUNT_SID = System.getenv("ACCOUNT_SID");
+    private static final String AUTH_TOKEN = System.getenv("AUTH_TOKEN");
+
     public Mono<String> sendCode(OtpMessage otpMessage) {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-        Message message = Message.creator(
+        Message.creator(
                 new com.twilio.type.PhoneNumber("whatsapp:+" + otpMessage.getCountryCode() + otpMessage.getPhoneNumber()),
                 new com.twilio.type.PhoneNumber("whatsapp:+14155238886"),
                 "Your verification code is " + otpMessage.getCode())

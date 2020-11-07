@@ -2,6 +2,8 @@ package com.ppwa.wa2fa.otp.domain;
 
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import java.time.LocalDateTime;
+
 public class OtpMessage {
 
     @MongoId
@@ -9,12 +11,14 @@ public class OtpMessage {
     private final String code;
     private final String countryCode;
     private final String phoneNumber;
+    private final LocalDateTime dateCreated;
 
-    public OtpMessage(String uuid, String code, String countryCode, String phoneNumber) {
+    public OtpMessage(String uuid, String code, String countryCode, String phoneNumber, LocalDateTime dateCreated) {
         this.uuid = uuid;
         this.code = code;
         this.countryCode = countryCode;
         this.phoneNumber = phoneNumber;
+        this.dateCreated = dateCreated;
     }
 
     public String getUuid() {
@@ -33,13 +37,8 @@ public class OtpMessage {
         return phoneNumber;
     }
 
-    @Override
-    public String toString() {
-        return "OtpMessage{" +
-                "uuid='" + uuid + '\'' +
-                ", code='" + code + '\'' +
-                ", countryCode='" + countryCode + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
     }
+
 }
