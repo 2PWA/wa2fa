@@ -32,4 +32,14 @@ public class OtpMessage {
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
+    @Override
+    public String toString() {
+        return "OtpMessage{" +
+                "uuid='" + uuid + '\'' +
+                ", code='" + code + '\'' +
+                ", countryCode='" + countryCode + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
 }

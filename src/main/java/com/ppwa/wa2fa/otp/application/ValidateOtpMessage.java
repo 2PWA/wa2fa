@@ -1,8 +1,11 @@
 package com.ppwa.wa2fa.otp.application;
 
 import com.ppwa.wa2fa.otp.domain.OtpMessage;
+import com.ppwa.wa2fa.otp.infrastructure.CodeNotValidException;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
+
+import static reactor.core.publisher.Mono.error;
 
 @Service
 public class ValidateOtpMessage {
@@ -13,13 +16,17 @@ public class ValidateOtpMessage {
         this.otpRepository = otpRepository;
     }
 
-    public Mono<String> execute(ValidateOtpMessageCommand validateOtpMessageCommand) {
+    public Mono<Void> execute(ValidateOtpMessageCommand validateOtpMessageCommand) {
 
         return otpRepository.findById(validateOtpMessageCommand.getUuid())
-                            .flatMap(otpMessage -> validateOtpCode(otpMessage, validateOtpMessageCommand));
+                            .switchIfEmpty(error(CodeNotValidException::new))
+                            .flatMap(otpMessage -> validateOtpCode(otpMessage, validateOtpMessageCommand))
+                            .flatMap(otpMessage -> otpRepository.deleteById(validateOtpMessageCommand.getUuid()))
+                            .then();
     }
 
-    private Mono<String> validateOtpCode(OtpMessage otpMessage, ValidateOtpMessageCommand validateOtpMessageCommand) {
-        return null;
+    private Mono<OtpMessage> validateOtpCode(OtpMessage otpMessage, ValidateOtpMessageCommand validateOtpMessageCommand) {
+        if (!otpMessage.getCode().equals(validateOtpMessageCommand.getCode())) throw new CodeNotValidException();
+        return  Mono.just(otpMessage);
     }
 }

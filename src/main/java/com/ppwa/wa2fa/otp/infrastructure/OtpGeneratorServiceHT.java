@@ -25,7 +25,7 @@ public class OtpGeneratorServiceHT implements OtpGeneratorService {
             keyGenerator.init(256);
 
             final Key key = keyGenerator.generateKey();
-            otpCode = String.valueOf(totp.generateOneTimePassword(key, Instant.now()));
+            otpCode = String.format("%06d", totp.generateOneTimePassword(key, Instant.now()));
         } catch (NoSuchAlgorithmException | InvalidKeyException e) {
             e.printStackTrace();
         }

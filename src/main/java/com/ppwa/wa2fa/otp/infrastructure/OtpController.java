@@ -26,7 +26,7 @@ public final class OtpController {
     }
 
     @PostMapping("/otp/{uuid}")
-    public Mono<String> validate(@PathVariable String uuid,
+    public Mono<Void> validate(@PathVariable String uuid,
                                  @RequestHeader("x-api-key") String apiKey,
                                  @RequestHeader("x-wa2fa-otp") String otpCode) {
         ValidateOtpMessageCommand validateOtpMessageCommand = new ValidateOtpMessageCommand(uuid, apiKey, otpCode);
